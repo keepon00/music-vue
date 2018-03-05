@@ -6,7 +6,7 @@
           <slider>
             <div v-for="(item, index) in recommends" :key="index">
               <a :href="item.linkUrl">
-                <img @load="loadImage" :src="item.picUrl">
+                <img class="needsclick" @load="loadImage" :src="item.picUrl">
               </a>
             </div>
           </slider>
@@ -16,7 +16,7 @@
           <ul>
             <li v-for="(item, index) in discLists" :key="index" class="item">
               <div class="icon">
-                <img width="60" height="60" :src="item.imgurl">
+                <img width="60" height="60" v-lazy="item.imgurl">
               </div>
               <div class="text">
                 <h2 class="name" v-html="item.creator.name"></h2>
@@ -48,10 +48,7 @@
       }
     },
     created() {
-      setTimeout(() => {
-        this._getRecommend()
-      }, 2000)
-
+      this._getRecommend()
       this._getDiscList()
     },
     methods: {
